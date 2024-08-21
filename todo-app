@@ -42,6 +42,54 @@
           <ul id="todo-list" class="todo-list"></ul>
       </div>
 
-      <script src="script.js"></script>
+      <script>
+ // Selecting DOM elements
+ const todoInput = document.getElementById('todo-input');
+ const addTodoButton = document.getElementById('add-todo');
+ const todoList = document.getElementById('todo-list');
+
+ // Function to create a new To-Do item
+ function createTodoItem(task) {
+     // Create elements
+     const todoItem = document.createElement('li');
+     const todoText = document.createElement('span');
+     const deleteButton = document.createElement('button');
+
+     // Assign classes and content
+     todoItem.classList.add('todo-item');
+     todoText.textContent = task;
+     deleteButton.textContent = 'Delete';
+
+     // Append the text and button to the list item
+     todoItem.appendChild(todoText);
+     todoItem.appendChild(deleteButton);
+
+     // Append the list item to the list
+     todoList.appendChild(todoItem);
+
+     // Event listener for delete button
+     deleteButton.addEventListener('click', function() {
+         todoList.removeChild(todoItem);
+     });
+ }
+
+ // Event listener for adding a new task
+ addTodoButton.addEventListener('click', function() {
+     const task = todoInput.value.trim();
+
+     if (task !== "") {
+         createTodoItem(task);
+         todoInput.value = ""; // Clear the input field
+     }
+ });
+
+ // Optional: Add task on pressing Enter key
+ todoInput.addEventListener('keypress', function(event) {
+     if (event.key === 'Enter') {
+         addTodoButton.click();
+     }
+ });
+
+</script>
   </body>
   </html>
